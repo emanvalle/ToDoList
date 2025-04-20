@@ -18,9 +18,15 @@ struct LoginView: View {
                            subtitle: "Get things done",
                            angle: 15,
                            background: .pink)
-                
+                 
                 //Login Form
                 Form {
+                    
+                    if !viewModel.errorMessage.isEmpty {
+                        Text(viewModel.errorMessage)
+                            .foregroundColor(Color.red)
+                    }
+                    
                     TextField("Email", text: $viewModel.email)
                         .textFieldStyle(DefaultTextFieldStyle())
                         .autocapitalization(.none)
@@ -32,6 +38,7 @@ struct LoginView: View {
                               background: .blue
                     ) {
                         //Attempt Log In
+                        viewModel.login()
                     }
                 }
                 .offset(y: -50)
